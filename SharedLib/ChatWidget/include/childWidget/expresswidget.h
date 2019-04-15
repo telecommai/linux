@@ -1,0 +1,65 @@
+﻿#ifndef EXPRESSWIDGET_H
+#define EXPRESSWIDGET_H
+
+#include <QWidget>
+#include <QTreeWidgetItem>
+#include "myemotionwidget.h"
+#include <QMap>
+#include <QScrollBar>
+#include <QFile>
+
+#ifdef Q_OS_WIN
+#pragma execution_character_set("utf-8")
+#endif // Q_OS_WIN
+
+/*************表情窗体****************/
+
+namespace Ui {
+class ExpressWidget;
+}
+
+class ExpressWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit ExpressWidget(QWidget *parent = 0);
+    ~ExpressWidget();
+
+    void showNormalEmotion(QPoint point);   //展示鼠标点击
+
+    void showSmallEmotion(QPoint point);    //展示鼠标移动
+
+    QString GetExControlImgPath(int nIndex);   //获取表情路径
+
+
+	//改用静态函数
+	static void InsertExControl();
+	static QString GetDescriptionByImagePath(QString strImgPath);    // 根据表情路径 返回表情描述字
+	static QString GetImagePathByDescription(QString strImgDescription);   // 根据表情描述字返回表情的路径
+private:
+	QString getTranslate(QString val);
+    void InitExpressWindow();
+    void InitExpressEmotion();
+	void InitTranslation();//初始化翻译
+   
+    bool eventFilter(QObject *obj, QEvent *e);//事件过滤器
+
+private slots:
+void slotGetNormalRowColumn(int, int);  //获取当前点击的行列
+signals:
+	void sigExpressImagePath(QString);     //发送当前选择图片的位置
+private:
+    Ui::ExpressWidget *ui;
+    bool m_isNeedHide;
+    MyEmotionWidget* m_normalEmotionWidget;  //鼠标点击样式
+    MyEmotionWidget* m_smallEmotionWidget;   //鼠标移动样式
+
+    static QMap<QString,QString> mMapExControl;     //表情名称对照表
+	QMap<QString, QString> mMapTranslate;     //表情中英文对照
+
+	int     m_row;			// 表情窗口的行数
+	int     m_column;       // 表情窗口的列数
+};
+
+#endif // EXPRESSWIDGET_H
