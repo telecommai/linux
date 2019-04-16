@@ -8,7 +8,7 @@
 #define HTTP_GETGROUPUSER 	"/IMServer/group/getUserListByGroupId"  //获取群组成员
 #define HTTP_GETBUDDYINFOBYID 	"/IMServer/user/getOtherUserByUserId?otherUserId="  //根据ID查找用户信息
 #define HTTP_GETGROUPINFOBYGROUPID 	"/IMServer/group/getGroupByGroupId" //根据群组ID获取群组信息
-#define HTTP_GETSCANQRCODE       "http://tc.solarsource.cn:9692/tcserver/oauth/code?client_id="  //扫码登陆请求code
-#define HTTP_GETSCANQRSTATUS     "http://tc.solarsource.cn:9692/tcserver/oauth/authenticationCode?code="                             //根据code判断二维码是否被扫码
+#define HTTP_GETSCANQRCODE       "https://tc.telecomm.io/tcserver/oauth/code?client_id="  //扫码登陆请求code
+#define HTTP_GETSCANQRSTATUS     "https://tc.telecomm.io/tcserver/oauth/authenticationCode?code="                             //根据code判断二维码是否被扫码
 
 #endif // DEFINE_H

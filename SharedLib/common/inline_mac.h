@@ -9,7 +9,11 @@ inline QString getResourcePath()
 {
     QString strLocationName = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
     strLocationName = strLocationName.section("/", -1, -1);
-    QString strPath = "/Users/" + strLocationName +"/Library/Application\ Support/Telecomm/";
+    #ifdef Q_OS_MAC
+    QString strPath = "/Users/" + strLocationName +"/Library/Application\ Support/OpenPlanet/";
+    #else
+    QString strPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/OpenPlanet";
+    #endif
     return strPath;
 }
 
